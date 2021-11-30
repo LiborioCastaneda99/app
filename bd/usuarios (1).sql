@@ -2,7 +2,7 @@
 -- version 4.4.15.10
 -- https://www.phpmyadmin.net
 --
--- Servidor: localhost
+-- Servidor: 192.168.18.248
 -- Tiempo de generación: 30-11-2021 a las 05:13:31
 -- Versión del servidor: 5.5.68-MariaDB
 -- Versión de PHP: 5.4.16

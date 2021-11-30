@@ -43,7 +43,7 @@ $result=mysqli_query($conexion,$sql);
 					<th class="success">ARL</th>
 					<th class="success">EPS</th>
 					<th class="success">Tipo de sangre</th>
-					<th class="success" width="16%">Acciones</th>
+					<th class="success" width="20%">Acciones</th>
 					
 				</tr>
 			</thead>
@@ -62,8 +62,11 @@ $result=mysqli_query($conexion,$sql);
 							<td><?php echo strtoupper($mostrar[7]); ?></td>
 							<td><?php echo strtoupper($mostrar[8]); ?></td>
 							<td style="text-align: center;" >
-								<button class="btn btn-primary btn-icon btn-icon-center btn-sm datos" data-text="<?php echo 'http://accountstoretv.000webhostapp.com/qr/generate.php?text=' ?>" data-descr="<?php echo htmlentities($mostrar[1]); ?>" data-toggle="modal" data-target="#staticBackdrop">
+								<button class="btn btn-picton btn-icon btn-icon-center btn-sm datos" data-text="<?php echo 'https://accountstoretv.000webhostapp.com/qr/generate.php?text=' ?>" data-descr="<?php echo htmlentities($mostrar[0]); ?>" data-toggle="modal" data-target="#staticBackdrop">
 									<span class="icon mdi mdi-eye"></span>
+								</button>
+								<button class="btn btn-steel btn-icon btn-icon-center btn-sm" data-toggle="modal" data-target="#modalEditar" onclick="agregaFrmActualizar('<?php echo $mostrar[0] ?>')">
+									<span class="icon mdi mdi-pencil"></span>
 								</button>
 							<!-- <span>
 								<a class="btn btn-default btn-icon btn-icon-center btn-sm" href="http://accountstoretv.000webhostapp.com/qr/show.php?text=123">

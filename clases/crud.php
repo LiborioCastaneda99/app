@@ -5,11 +5,10 @@
 			$obj= new conectar();
 			$conexion=$obj->conexion();
 			$tildes = $conexion->query("SET NAMES 'utf8'");
-			
-			$sql="INSERT INTO cursos (codigo_curso, curso, jornada, horario, intensidad, fecha_inicio, municipio,
-			direccion, formacion, centro, descripcion, nombre_grupo, estado) 
-			VALUES ('$datos[0]','$datos[1]','$datos[2]','$datos[5]','$datos[6]','$datos[7]','$datos[8]',
-			'$datos[9]','$datos[10]','$datos[4]','$datos[12]','$datos[3]','$datos[11]')";
+		
+			$sql="INSERT INTO usuarios ( nombre, apellidos, cedula, tel, empresa, arl, img_usu, ips, tipo_seguro, email, cargo, ciudad, direccion) 
+			VALUES ('$datos[0]','$datos[1]','$datos[2]','$datos[3]','$datos[4]','$datos[6]','fotoPerfil.png',
+			'$datos[5]','$datos[7]','$datos[8]','$datos[9]','$datos[10]','$datos[11]')";
 	
 			return mysqli_query($conexion,$sql);
 		}
@@ -100,8 +99,7 @@
 			$obj =  new conectar();
 			$conexion = $obj->conexion();
 			$tildes = $conexion->query("SET NAMES 'utf8'");
-			$sql = "SELECT id, nombre, apellidos, cedula, tel, empresa, arl, 
-			ips, tipo_seguro, email, cargo, ciudad, direccion FROM cursos WHERE id = '$id'";
+			$sql = "SELECT id, nombre, apellidos, cedula, tel, empresa, arl, ips, tipo_seguro, email, cargo, ciudad, direccion FROM usuarios WHERE id = '$id' and activo = 1";
 			$result = mysqli_query($conexion,$sql);
 			$ver = mysqli_fetch_row($result);
 			
@@ -160,9 +158,10 @@
 			$obj= new conectar();
 			$conexion=$obj->conexion();
 			$tildes = $conexion->query("SET NAMES 'utf8'");
-			$sql="UPDATE cursos SET curso ='$datos[1]',jornada='$datos[2]', horario='$datos[5]',intensidad='$datos[6]',
-			fecha_inicio='$datos[7]',municipio='$datos[8]',direccion='$datos[9]',formacion='$datos[10]',centro='$datos[4]',
-			descripcion='$datos[12]',nombre_grupo='$datos[3]',estado='$datos[11]' WHERE id='$datos[0]'";
+		
+			$sql="UPDATE usuarios SET nombre ='$datos[1]',apellidos='$datos[2]', cedula='$datos[4]',tel='$datos[3]',
+			empresa='$datos[5]',arl='$datos[6]',ips='$datos[7]',tipo_seguro='$datos[8]',email='$datos[9]',
+			ciudad='$datos[10]',direccion='$datos[11]', cargo='$datos[12]' WHERE id='$datos[0]' and activo = 1";
 			return mysqli_query($conexion,$sql);
 		}
 
@@ -226,26 +225,26 @@
 			return mysqli_query($conexion,$sql);
 		}
 		
-		public function vaciarCurso($idCurso){
-			$obj= new conectar();
-			$conexion=$obj->conexion();
+		// public function vaciarCurso($idCurso){
+		// 	$obj= new conectar();
+		// 	$conexion=$obj->conexion();
 
-			$sql_info = mysqli_query($conexion,"SELECT id FROM y_inscritos_cursos where id_curso='$idCurso' and estado = 1");
-			$cont = 0;
-			foreach ($sql_info as $d) {
-				$id = $d['id'];
+		// 	$sql_info = mysqli_query($conexion,"SELECT id FROM y_inscritos_cursos where id_curso='$idCurso' and estado = 1");
+		// 	$cont = 0;
+		// 	foreach ($sql_info as $d) {
+		// 		$id = $d['id'];
 
-				$sql= mysqli_query($conexion,"UPDATE y_inscritos_cursos SET estado = '0' WHERE id = $id AND estado = 1");
-				$cont = $cont + 1;
-			}
+		// 		$sql= mysqli_query($conexion,"UPDATE y_inscritos_cursos SET estado = '0' WHERE id = $id AND estado = 1");
+		// 		$cont = $cont + 1;
+		// 	}
 
-			if (count($sql_info == $cont)) {
-				// $sql= mysqli_query($conexion,"UPDATE cursos SET estado = 'Inactivo' WHERE id = $idCurso");
-				return 1;
-			}else{
-				return 2;
-			}
-		}
+		// 	if (count($sql_info == $cont)) {
+		// 		// $sql= mysqli_query($conexion,"UPDATE cursos SET estado = 'Inactivo' WHERE id = $idCurso");
+		// 		return 1;
+		// 	}else{
+		// 		return 2;
+		// 	}
+		// }
 	}
 
  ?>

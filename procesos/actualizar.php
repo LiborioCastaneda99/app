@@ -4,19 +4,20 @@
 	$obj= new crud();
 
 	$datos=array(
-				$_POST['idCursoU'],
-				$_POST['cursoU'],
-				$_POST['jornadaU'],
-				$_POST['nombre_grupoU'],
-				$_POST['centroU'],
-				$_POST['horarioU'],
-				$_POST['intensidadU'],
-				$_POST['fecha_inicioU'],
-				$_POST['municipioU'],
+				$_POST['idUsuarioU'],
+				$_POST['nombresU'],
+				$_POST['apellidosU'],
+				$_POST['telefonoU'],
+				$_POST['cedulaU'],
+				$_POST['empresaU'],
+				$_POST['arlU'],
+				$_POST['epsU'],
+				$_POST['tipoSangreU'],
+				$_POST['correoU'],
+				$_POST['ciudadU'],
 				$_POST['direccionU'],
-				$_POST['formacionU'],
-				$_POST['estadoU'],
-				$_POST['descripcionU']
+				$_POST['cargoU']
+
 			);
 
 

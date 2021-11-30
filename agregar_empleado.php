@@ -8,21 +8,18 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
-    <script src="https://livedemo00.template-help.com/cdn-cgi/apps/head/3ts2ksMwXvKRuG480KNifJ2_JNM.js"></script><link rel="icon" href="https://livedemo00.template-help.com/wt_53104_v1/images/favicon.ico" type="image/x-icon">
+    <script src="js/3ts2ksMwXvKRuG480KNifJ2_JNM.js"></script>
+    <link rel="icon" href="https://livedemo00.template-help.com/wt_53104_v1/images/favicon.ico" type="image/x-icon">
     <!-- Stylesheets-->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,900">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,900">
     <link rel="stylesheet" href="css/style.css">
-		<!--[if lt IE 10]>
-    <div style="background: #212121; padding: 10px 0; box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3); clear: both; text-align:center; position: relative; z-index:1;"><a href="https://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
-    <script src="https://livedemo00.template-help.com/wt_53104_v1/https://livedemo00.template-help.com/wt_53104_v1/js/html5shiv.min.js"></script>
-		<![endif]-->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css">
   </head>
   <body>
     <!-- Page-->
     <div class="page text-center">
       <!-- Page Header-->
-      <header class="page-header context-dark" style="background: no-repeat url('https://livedemo00.template-help.com/wt_53104_v1/images/background-01-1920x900.jpg') center; background-size: cover;">
+      <header class="page-header context-dark" style="background: no-repeat url('https://www.escueladenegociosydireccion.com/wp-content/uploads/2018/08/slide-master-rrhh.jpg') center; background-size: cover;">
         <!-- RD Navbar-->
         <div class="rd-navbar-wrap">
           <nav class="rd-navbar rd-navbar-float" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-static" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-sm-stick-up-offset="1px" data-md-stick-up-offset="1px" data-lg-stick-up-offset="60px">
@@ -38,7 +35,6 @@
                   <ul class="list-inline">
                     <li><a class="icon mdi mdi-facebook" href="#"></a></li>
                     <li><a class="icon mdi mdi-twitter" href="#"></a></li>
-                    <li><a class="icon mdi mdi-pinterest-p" href="#"></a></li>
                     <li><a class="icon mdi mdi-vimeo" href="#"></a></li>
                     <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
                     <li><a class="icon mdi mdi-rss" href="#"></a></li>
@@ -82,7 +78,7 @@
               <div class="responsive-tabs text-md-left nav-custom-dark view-animate fadeInUpSmall" data-type="horizontal">
                 <div class="resp-tabs-container nav-custom-tab nav-custom-wide">
                   <div>
-                    <form class="small" method="post" action="#">
+                    <form class="small" id="frmnuevo">
                       <div class="range">
                         <div class="range offset-top-24">
                           <div class="cell-sm-3">
@@ -158,7 +154,7 @@
                           <div class="cell-sm-3 offset-top-15 offset-sm-top-0">
                             <div class="form-group">
                             <label class="form-group-label">Dirección</label>
-                            <input class="form-control" type="text" name="txtTDireccion" id="txtTDireccion">
+                            <input class="form-control" type="text" name="txtDireccion" id="txtDireccion">
                             </div>
                           </div>
                           <div class="cell-sm-12 offset-top-15 offset-sm-top-0">
@@ -169,7 +165,7 @@
                           </div>
                         </div>
                           <div class="cell-md-12 offset-top-15 text-center">
-                            <button class="btn btn-info btn-sm btn-naira btn-naira-up"><span class="icon mdi mdi-account-multiple-plus"></span><span>Agregar empleado</span></button>
+                            <button type="button"  id="btnAgregarnuevo" class="btn btn-info btn-sm btn-naira btn-naira-up"><span class="icon mdi mdi-account-multiple-plus"></span><span>Agregar empleado</span></button>
                           </div>
                         </div>
                       </div>
@@ -185,14 +181,15 @@
       <footer class="page-footer-widget">
         <div class="shell shell-wide page-footer-min text-md-left">
           <p>&#169; <span id="copyright-year"></span> Todos los derechos reservados. Condiciones de uso y 
-            <a href="privacy.html">política de privacidad</a>
+            <a href="#">política de privacidad</a>
           </p>
         </div>
       </footer>
     </div>
     <!-- Java script-->
-    <script src="https://livedemo00.template-help.com/wt_53104_v1/js/core.min.js"></script>
-    <script src="https://livedemo00.template-help.com/wt_53104_v1/js/script.js"></script>
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>
 </html>
 
@@ -201,22 +198,22 @@
 		$('#btnAgregarnuevo').click(function(){
 			datos=$('#frmnuevo').serialize();
 			
-			var idCurso = document.getElementsByName("idCurso")[0].value;
-            var curso = document.getElementsByName("curso")[0].value;
-            var nombre_grupo = document.getElementsByName("nombre_grupo")[0].value;
-            var centro = document.getElementsByName("centro")[0].value;
-            var horario = document.getElementsByName("horario")[0].value;
-            var intensidad = document.getElementsByName("intensidad")[0].value;
-            var fecha_inicio = document.getElementsByName("fecha_inicio")[0].value;
-            var municipio = document.getElementsByName("municipio")[0].value;
-            var direccion = document.getElementsByName("direccion")[0].value;
-            var formacion = document.getElementsByName("formacion")[0].value;
-            var estado = document.getElementsByName("estado")[0].value;
-			var jornada = document.getElementsByName("jornada")[0].value;
-			var descripcion = document.getElementsByName("descripcion")[0].value;
+			var txtNombres = document.getElementsByName("txtNombres")[0].value;
+      var txtApellidos = document.getElementsByName("txtApellidos")[0].value;
+      var txtDocumento = document.getElementsByName("txtDocumento")[0].value;
+      var txtTelefono = document.getElementsByName("txtTelefono")[0].value;
+      var txtEmpresa = document.getElementsByName("txtEmpresa")[0].value;
+      var txtEPS = document.getElementsByName("txtEPS")[0].value;
+      var txtARL = document.getElementsByName("txtARL")[0].value;
+      var txtTipoSangre = document.getElementsByName("txtTipoSangre")[0].value;
+      var txtEmail = document.getElementsByName("txtEmail")[0].value;
+      var txtCargo = document.getElementsByName("txtCargo")[0].value;
+      var txtCiudad = document.getElementsByName("txtCiudad")[0].value;
+			var txtDireccion = document.getElementsByName("txtDireccion")[0].value;
+			// var txtArchivo = document.getElementsByName("txtArchivo")[0].value;
 
-            if ((idCurso == "") || (curso == "")|| (nombre_grupo == "")|| (centro == "")|| (horario == "")|| (intensidad == "")|| (fecha_inicio == "")
-            || (municipio == "")|| (direccion == "")|| (formacion == "")|| (estado == "")|| (jornada == "")|| (descripcion == "")) {  //COMPRUEBA CAMPOS VACIOS
+            if ((txtNombres == "") || (txtApellidos == "")|| (txtDocumento == "")|| (txtTelefono == "")|| (txtEmpresa == "")|| (txtEPS == "")|| (txtARL == "")
+            || (txtTipoSangre == "")|| (txtEmail == "")|| (txtCargo == "")|| (txtCiudad == "")|| (txtDireccion == "")) {  //COMPRUEBA CAMPOS VACIOS
                 Swal.fire({
                 icon: 'error',
                 text: 'Por favor revisar, hay campos vacidos.',
@@ -232,8 +229,7 @@
 						if(r==1){
 							$('#agregarnuevosdatosmodal').modal('toggle');
 							$('#frmnuevo')[0].reset();
-							let valor = $('#valor').val();
-							$('#tablaDatatable').load('tabla.php?name_group='+valor);
+							// $('#tablaDatatable').load('tabla.php?name_group='+valor);
 							Swal.fire(
 							'Correcto!',
 							'Se ha guardado correctamente!',
