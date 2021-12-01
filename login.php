@@ -1,5 +1,8 @@
 
 <?php 
+
+error_reporting(0);
+
 session_start();
 
 require_once "clases/conexion.php";
@@ -27,10 +30,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
   if (count($result_login) > 0 && ($_POST['password'] == $user[4])) {
     $_SESSION['user_id'] = $user[0];
 
-    // $fecha=date('y-m-d');
-    // include 'save-fecha-sesion.php';
-
-    header("Location: index.php");
+    echo "<script>window.location='index.php';</script>";
 
   } else {
     echo "<script>alert('Lo sentimos, su correo o contraseña son erroneos, por favor verifique nuevamente su información y accede al aplicativo.');</script>";
