@@ -7,8 +7,8 @@ $conexion=$obj->conexion();
 
 $tildes = $conexion->query("SET NAMES 'utf8'");
 $sql="SELECT id, nombre, apellidos, cedula, tel, empresa, arl, 
-ips, tipo_seguro, email, cargo, ciudad, direccion
-FROM usuarios WHERE activo = 1 AND id = {$_GET['id']}";
+ips, tipo_seguro, email, cargo, ciudad, direccion, img_usu
+FROM empleados WHERE activo = 1 AND id = {$_GET['id']}";
 $result=mysqli_fetch_row(mysqli_query($conexion,$sql));
 
 $html = '
@@ -27,7 +27,7 @@ $html = '
 <tr>
 <th colspan="2" style="text-align:center; height: 40px; background-color:#0164a5; color: #fff;">Nombres</th>
     <td colspan="2" style="text-align:center; height: 40px;">'.$result[1].'</td>
-    <td rowspan="8"><center><img width= "250px" height="250px" src="../img/perfil.png"></center></td>
+    <td rowspan="8"><center><img width= "250px" height="250px" src="../images/'.$result[13].'"></center></td>
 </tr>
 <tr>
     <th colspan="2" style="text-align:center; height: 40px; background-color:#0164a5; color: #fff;">Apellidos</th>
@@ -69,10 +69,13 @@ $html = '
 
 include("mpdf.php");
 
+// $mpdf=new mPDF('c', '', '', '', 15, 15, 65, 30, 9, 9, 'L'); 
 $mpdf=new mPDF(); 
 
 $mpdf->WriteHTML($html);
-$mpdf->Output();
+$mpdf->SetTitle('Datos del empleado '.$result[1]. ' '.$result[2]);
+$file_name = 'Datos de CC-'.$result[3].'.pdf';
+$mpdf->Output($file_name, 'I');
 exit;
 
 //==============================================================

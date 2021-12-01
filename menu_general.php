@@ -21,34 +21,28 @@
             </div>
             </div>
         </div>
-        <div class="rd-navbar-inner">
-            <!-- RD Navbar Panel-->
-            <div class="rd-navbar-panel">
-            <!-- RD Navbar Toggle-->
-            <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-            <!-- RD Navbar Brand-->
-            <div class="rd-navbar-brand"><a class="reveal-inline-block brand-name" href="index.html"><img class="img-responsive center-block" src="https://livedemo00.template-help.com/wt_53104_v1/images/logo-dark-233x55.png" width="233" height="55" alt=""></a></div>
+            <div class="rd-navbar-inner">
+              <!-- RD Navbar Panel-->
+              <div class="rd-navbar-panel">
+                <!-- RD Navbar Toggle-->
+                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                <!-- RD Navbar Brand-->
+                <div class="rd-navbar-brand"><a class="reveal-inline-block brand-name" href="index.php"><img class="img-responsive center-block" src="https://livedemo00.template-help.com/wt_53104_v1/images/logo-dark-233x55.png" width="233" height="55" alt=""></a></div>
+              </div>
+              <div class="rd-navbar-nav-wrap">
+                <!-- RD Navbar Nav-->
+                <ul class="rd-navbar-nav">
+                  <?php if(count($user) > 0 ): ?>
+                    <li class="active"><a><?= $user[1]. " ". $user[2];?></a></li>
+                  <?php endif; ?>
+                  <li><a href="agregar_empleado.php">AGREGAR EMPLEADO</a></li>
+                  <li><a href="gestionar_empleado.php">GESTIONAR EMPLEADO</a></li>
+                  <?php if(count($user) > 0 ): ?>
+                    <li><a href="logout.php">CERRAR SESIÓN</a></li>
+                  <?php endif; ?>
+                </ul>
+              </div>
             </div>
-            <div class="rd-navbar-nav-wrap">
-            <!-- RD Navbar Nav-->
-            <ul class="rd-navbar-nav">
-                <li class=""><a href="agregar_empleado.php">AGREGAR EMPLEADO</a></li>
-                <li class="active"><a href="gestionar_empleado.php">GESTIONAR EMPLEADO</a></li>
-                <li><a href="contacts.html">CERRAR SESIÓN</a></li>
-            </ul>
-            <!--RD Navbar Search-->
-            <div class="rd-navbar-search"><a class="rd-navbar-search-toggle" data-rd-navbar-toggle=".rd-navbar-search" href="#"><span class="mdi mdi-search"></span></a>
-                <form class="rd-search" action="search-results.html" data-search-live="rd-search-results-live" method="GET">
-                <div class="form-group">
-                    <label class="form-label" for="rd-navbar-search-form-input">Search</label>
-                    <input class="rd-navbar-search-form-input form-control form-control-gray-lightest" id="rd-navbar-search-form-input" type="text" name="s" autocomplete="off">
-                </div>
-                <button class="btn mdi mdi-search"></button>
-                <div class="rd-search-results-live" id="rd-search-results-live"></div>
-                </form>
-            </div>
-            </div>
-        </div>
         </nav>
     </div>
 </header>

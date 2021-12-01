@@ -6,25 +6,10 @@ require_once "clases/conexion.php";
 $obj= new conectar();
 $conexion=$obj->conexion();
 
-// if (isset($_SESSION['user_id'])) {
-// 	$id = $_SESSION['user_id'];
-// 	$tildes = $conexion->query("SET NAMES 'utf8'");
-// 	$sql="SELECT id, nombres, apellidos, tipodocumento, documento, tipoPoblacion, email, password, 
-// 	fechaRegistro, rol, fecha_sesion, telefono, fechaNacimiento, municipio, sexo, img, centro 
-// 	FROM users WHERE id = $id";
-// 	$result_login = mysqli_fetch_row(mysqli_query($conexion,$sql));
-// 	$user = null;
-  
-// 	if (count($result_login) > 0) {
-// 	  $user = $result_login;
-// 	}
-// }
-
-
 $tildes = $conexion->query("SET NAMES 'utf8'");
 $sql="SELECT id, nombre, apellidos, cedula, tel, empresa, arl, 
 ips, tipo_seguro, email, cargo, ciudad, direccion
-FROM usuarios WHERE activo = 1";
+FROM empleados WHERE activo = 1";
 $result=mysqli_query($conexion,$sql);
 
 ?>
@@ -62,7 +47,7 @@ $result=mysqli_query($conexion,$sql);
 							<td><?php echo strtoupper($mostrar[7]); ?></td>
 							<td><?php echo strtoupper($mostrar[8]); ?></td>
 							<td style="text-align: center;" >
-								<button class="btn btn-picton btn-icon btn-icon-center btn-sm datos" data-text="<?php echo 'https://accountstoretv.000webhostapp.com/qr/generate.php?text=' ?>" data-descr="<?php echo htmlentities($mostrar[0]); ?>" data-toggle="modal" data-target="#staticBackdrop">
+								<button class="btn btn-picton btn-icon btn-icon-center btn-sm datos" data-text="<?php echo 'https://lsklm.000webhostapp.com/qr/generate.php?text=' ?>" data-descr="<?php echo htmlentities($mostrar[0]); ?>" data-toggle="modal" data-target="#staticBackdrop">
 									<span class="icon mdi mdi-eye"></span>
 								</button>
 								<button class="btn btn-steel btn-icon btn-icon-center btn-sm" data-toggle="modal" data-target="#modalEditar" onclick="agregaFrmActualizar('<?php echo $mostrar[0] ?>')">
