@@ -1,14 +1,17 @@
 <?php
 
+$servername = "localhost";
+$username = "id18070074_logistic_solution_klm_";
+$password = "Lc12345******";
+$dbname = "id18070074_logistic_solution_klm";
 
-require_once "../clases/conexion.php";
-$obj= new conectar();
-$conexion=$obj->conexion();
+// Create connection
+$conexion = mysqli_connect($servername, $username, $password, $dbname);
 
 $tildes = $conexion->query("SET NAMES 'utf8'");
 $sql="SELECT id, nombre, apellidos, cedula, tel, empresa, arl, 
 ips, tipo_seguro, email, cargo, ciudad, direccion, img_usu
-FROM empleados WHERE activo = 1 AND id = {$_GET['id']}";
+FROM usuarios WHERE activo = 1 AND id = {$_GET['id']}";
 $result=mysqli_fetch_row(mysqli_query($conexion,$sql));
 
 $html = '
@@ -69,7 +72,6 @@ $html = '
 
 include("mpdf.php");
 
-// $mpdf=new mPDF('c', '', '', '', 15, 15, 65, 30, 9, 9, 'L'); 
 $mpdf=new mPDF(); 
 
 $mpdf->WriteHTML($html);
