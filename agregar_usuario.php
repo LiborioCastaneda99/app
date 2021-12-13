@@ -9,17 +9,26 @@ $conexion=$obj->conexion();
 if (isset($_SESSION['user_id'])) {
   $id = $_SESSION['user_id'];
   $tildes = $conexion->query("SET NAMES 'utf8'");
-  $sql="SELECT id, nombres, apellidos, correoElectronico, password, fechaRegistro, ultimoInicio 
-	FROM usuarios WHERE id = '$id'";
+  $sql="SELECT id, nombres, apellidos, correoElectronico, password, fechaRegistro, ultimoInicio, tipoUsuario, empresa	FROM usuarios WHERE id = '$id'";
 	$result_login = mysqli_fetch_row(mysqli_query($conexion,$sql));
 	$user = null;
 
   if (count($result_login) > 0) {
     $user = $result_login;
 
+    $idEmpresa_ = "";
+
+    if ($user[7] == 2) {
+        $idEmpresa_  = "AND id=".$user[8];
+    }
+
     $countId="SELECT count(id) as id
     FROM empleados WHERE activo = 1";
     $resId=mysqli_fetch_row(mysqli_query($conexion,$countId));
+
+    $resEmpresas="SELECT *
+    FROM empresa WHERE estado = 1 $idEmpresa_";
+    $resE=mysqli_query($conexion,$resEmpresas);
 
   }
 }
@@ -29,13 +38,13 @@ if (isset($_SESSION['user_id'])) {
 <html class="" lang="es">
   <head>
     <!-- Site Title-->
-    <title>Agregar Empleados | Logistic & Solution KLM</title>
+    <title>Agregar Usuarios | Logistic & Solution KLM</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <script src="js/3ts2ksMwXvKRuG480KNifJ2_JNM.js"></script>
-    <link rel="icon" href="https://livedemo00.template-help.com/wt_53104_v1/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/logolys.png" type="image/x-icon">
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,900">
     <link rel="stylesheet" href="css/style.css">
@@ -77,16 +86,19 @@ if (isset($_SESSION['user_id'])) {
                   <!-- RD Navbar Toggle-->
                   <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                   <!-- RD Navbar Brand-->
-                  <div class="rd-navbar-brand"><a class="reveal-inline-block brand-name" href="index.php"><img class="img-responsive center-block" src="https://livedemo00.template-help.com/wt_53104_v1/images/logo-dark-233x55.png" width="233" height="55" alt=""></a></div>
+                  <div class="rd-navbar-brand"><a class="reveal-inline-block brand-name" href="index.php"><img class="img-responsive center-block" src="img/20211209_200434_0000.png" width="233" height="55" alt=""></a></div>
                 </div>
                 <div class="rd-navbar-nav-wrap">
                   <!-- RD Navbar Nav-->
                   <ul class="rd-navbar-nav">
                     <?php if(count($user) > 0 ): ?>
-                      <li><a><?= $user[1]. " ". $user[2];?></a></li>
+                      <li><a><?php if($user[7] == 1){ echo 'ADMINISTRADOR';}elseif($user[7] == 2){ echo 'GESTOR EMPRESARIAL';}?></a></li>
                     <?php endif; ?>
-                    <li class="active"><a href="agregar_empleado.php">AGREGAR EMPLEADO</a></li>
-                    <li><a href="gestionar_empleado.php">GESTIONAR EMPLEADO</a></li>
+                    <li class="active"><a href="agregar_usuario.php">AGREGAR USUARIO</a></li>
+                    <li><a href="gestionar_usuario.php">GESTIONAR USUARIO</a></li>
+                    <?php if($user[7] == 1):?>
+                            <li><a href="gestionar_empresa.php">GESTIONAR EMPRESA</a></li>
+                        <?php endif; ?>
                     <?php if(count($user) > 0 ): ?>
                       <li><a href="logout.php">CERRAR SESIÓN</a></li>
                     <?php endif; ?>
@@ -95,13 +107,13 @@ if (isset($_SESSION['user_id'])) {
               </div>
             </nav>
           </div>
-          <div class="shell shell-wide section-70 section-md-90">
+          <div class="shell shell-wide section-70 section-md-90" >
             <div class="range range-xs-middle range-xs-justify text-md-left">
               <div class="cell-xl-4 cell-lg-12 cell-md-12 text-left">
                 <div class="responsive-tabs text-md-left nav-custom-dark view-animate fadeInUpSmall" data-type="horizontal">
-                  <div class="resp-tabs-container nav-custom-tab nav-custom-wide">
+                  <div class="resp-tabs-container nav-custom-tab nav-custom-wide" style="background-color:#dfdfdf; fontsty-color: black;">
                     <div>
-                      <form class="small" id="frmnuevo" method="post" action="#" enctype="multipart/form-data">
+                      <form class="small" id="frmnuevo" method="post" action="#" enctype="multipart/form-data" >
                         <div class="range">
                           <div class="range offset-top-24">
                             <div class="cell-sm-3">
@@ -133,7 +145,16 @@ if (isset($_SESSION['user_id'])) {
                             <div class="cell-sm-3">
                               <div class="form-group">
                                 <label class="form-group-label">Empresa</label>
-                                <input class="form-control" type="text" name="txtEmpresa" id="txtEmpresa">
+                                <select class="form-control" name="txtEmpresa" id="txtEmpresa">
+                                  <option value="" selected disabled="true">Seleccione...</option>
+                                  <?php 
+                                      while ($fila = mysqli_fetch_row($resE)) { ?>
+                                        <option value="<?php echo $fila[0];?>"><?= $fila[1]. ' - '.$fila[2]; ?></option>
+                                 <?php 
+                                      }
+                                      ?>
+                                </select>
+                                <!-- <input class="form-control" type="text" name="txtEmpresa" id="txtEmpresa"> -->
                               </div>
                             </div>
                             <div class="cell-sm-3 offset-top-15 offset-sm-top-0">
@@ -188,8 +209,8 @@ if (isset($_SESSION['user_id'])) {
                             </div>
                           </div>
                             <div class="cell-md-12 offset-top-15 text-center">
-                              <button type="button"  id="btnAgregarnuevo" class="btn btn-info btn-sm btn-naira btn-naira-up btnAgregarnuevo"><span class="icon mdi mdi-account-multiple-plus"></span><span>Agregar empleado</span></button>
-                              <!-- <input type="button" class="btn btn-info btn-sm btn-naira btn-naira-up btnAgregarnuevo" value="Agregar empleado"><span class="icon mdi mdi-account-multiple-plus"></span> -->
+                              <button type="button"  id="btnAgregarnuevo" class="btn btn-info btn-sm btn-naira btn-naira-up btnAgregarnuevo"><span class="icon mdi mdi-account-multiple-plus"></span><span>AGREGAR USUARIO</span></button>
+                              <!-- <input type="button" class="btn btn-info btn-sm btn-naira btn-naira-up btnAgregarnuevo" value="AGREGAR USUARIO"><span class="icon mdi mdi-account-multiple-plus"></span> -->
                             </div>
                           </div>
                         </div>

@@ -6,10 +6,17 @@ require_once "clases/conexion.php";
 $obj= new conectar();
 $conexion=$obj->conexion();
 
+$idEmpresa_ = $_GET['idEmp'];
+
+if ($idEmpresa_ != "") {
+	$id___ .= "AND e.id_empresa=$idEmpresa_";
+}
+
 $tildes = $conexion->query("SET NAMES 'utf8'");
-$sql="SELECT id, nombre, apellidos, cedula, tel, empresa, arl, 
-ips, tipo_seguro, email, cargo, ciudad, direccion
-FROM empleados WHERE activo = 1";
+$sql="SELECT e.id, e.nombre, e.apellidos, e.cedula, e.tel, emp.nombre, e.arl, e.ips, 
+e.tipo_seguro, e.email, e.cargo, e.ciudad, e.direccion 
+FROM empleados e INNER JOIN empresa emp ON emp.id = e.id_empresa 
+WHERE e.activo = 1 AND emp.estado = 1 $id___";
 $result=mysqli_query($conexion,$sql);
 
 ?>
@@ -47,10 +54,13 @@ $result=mysqli_query($conexion,$sql);
 							<td><?php echo strtoupper($mostrar[7]); ?></td>
 							<td><?php echo strtoupper($mostrar[8]); ?></td>
 							<td style="text-align: center;" >
-								<button class="btn btn-picton btn-icon btn-icon-center btn-sm datos" data-text="<?php echo 'https://lsklm.000webhostapp.com/qr/generate.php?text=' ?>" data-descr="<?php echo htmlentities($mostrar[0]); ?>" data-toggle="modal" data-target="#staticBackdrop">
-									<span class="icon mdi mdi-eye"></span>
-								</button>
-								<button class="btn btn-steel btn-icon btn-icon-center btn-sm" data-toggle="modal" data-target="#modalEditar" onclick="agregaFrmActualizar('<?php echo $mostrar[0] ?>')">
+								<?php if($user[7] == 1): ?>
+									<button class="btn btn-picton btn-icon btn-icon-center btn-sm datos" data-text="<?php echo 'https://lsklm.000webhostapp.com/qr/generate.php?text=' ?>" data-descr="<?php echo htmlentities($mostrar[0]); ?>" data-toggle="modal" data-target="#staticBackdrop">
+										<span class="icon mdi mdi-eye"></span>
+									</button>
+								<?php endif; ?>
+
+								<button class="btn btn-info btn-icon btn-icon-center btn-sm" data-toggle="modal" data-target="#modalEditar" onclick="agregaFrmActualizar('<?php echo $mostrar[0] ?>')">
 									<span class="icon mdi mdi-pencil"></span>
 								</button>
 							<!-- <span>

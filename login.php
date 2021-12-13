@@ -49,7 +49,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <script src="js/3ts2ksMwXvKRuG480KNifJ2_JNM.js"></script>
-    <link rel="icon" href="https://livedemo00.template-help.com/wt_53104_v1/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/logolys.png" type="image/x-icon">
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,900">
     <link rel="stylesheet" href="css/style.css">
@@ -63,7 +63,7 @@ if (!empty($_POST['email']) && !empty($_POST['password'])) {
       <!-- Page Content-->
       <main class="page-content">
         <section class="section-80 section-md-120">
-          <img class="img-responsive center-block" src="https://livedemo00.template-help.com/wt_53104_v1/images/logo-dark-233x55.png" alt=""><br>
+          <img class="img-responsive center-block" src="img/20211209_200434_0000.png" alt=""><br>
           <div class="shell">
             <ul class="nav-custom">
               <li><a class="active" href="login.php">Iniciar sesión</a></li>

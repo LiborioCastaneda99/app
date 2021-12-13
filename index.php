@@ -8,8 +8,7 @@ $conexion=$obj->conexion();
 if (isset($_SESSION['user_id'])) {
   $id = $_SESSION['user_id'];
   $tildes = $conexion->query("SET NAMES 'utf8'");
-  $sql="SELECT id, nombres, apellidos, correoElectronico, password, fechaRegistro, ultimoInicio 
-	FROM usuarios WHERE id = '$id'";
+  $sql="SELECT id, nombres, apellidos, correoElectronico, password, fechaRegistro, ultimoInicio, tipoUsuario, empresa	FROM usuarios WHERE id = '$id'";
 	$result_login = mysqli_fetch_row(mysqli_query($conexion,$sql));
 	$user = null;
 
@@ -36,7 +35,7 @@ $meses = array(1 => 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <script src="js/3ts2ksMwXvKRuG480KNifJ2_JNM.js"></script>
-    <link rel="icon" href="https://livedemo00.template-help.com/wt_53104_v1/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/logolys.png" type="image/x-icon">
     <!-- Stylesheets-->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,900">
     <link rel="stylesheet" href="css/style.css">
@@ -79,16 +78,19 @@ $meses = array(1 => 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
                   <!-- RD Navbar Toggle-->
                   <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                   <!-- RD Navbar Brand-->
-                  <div class="rd-navbar-brand"><a class="reveal-inline-block brand-name" href="index.php"><img class="img-responsive center-block" src="https://livedemo00.template-help.com/wt_53104_v1/images/logo-dark-233x55.png" width="233" height="55" alt=""></a></div>
+                  <div class="rd-navbar-brand"><a class="reveal-inline-block brand-name" href="index.php"><img class="img-responsive center-block" src="img/20211209_200434_0000.png" width="233" height="55" alt=""></a></div>
                 </div>
                 <div class="rd-navbar-nav-wrap">
                   <!-- RD Navbar Nav-->
                   <ul class="rd-navbar-nav">
                     <?php if(count($user) > 0 ): ?>
-                      <li class="active"><a><?= $user[1]. " ". $user[2];?></a></li>
+                      <li class="active"><a><?php if($user[7] == 1){ echo 'ADMINISTRADOR';}elseif($user[7] == 2){ echo 'GESTOR EMPRESARIAL';}?></a></li>
                     <?php endif; ?>
-                    <li><a href="agregar_empleado.php">AGREGAR EMPLEADO</a></li>
-                    <li><a href="gestionar_empleado.php">GESTIONAR EMPLEADO</a></li>
+                    <li><a href="agregar_usuario.php">AGREGAR USUARIO</a></li>
+                    <li><a href="gestionar_usuario.php">GESTIONAR USUARIO</a></li>
+                    <?php if($user[7] == 1):?>
+                            <li><a href="gestionar_empresa.php">GESTIONAR EMPRESA</a></li>
+                        <?php endif; ?>
                     <?php if(count($user) > 0 ): ?>
                       <li><a href="logout.php">CERRAR SESIÓN</a></li>
                     <?php endif; ?>
@@ -113,7 +115,7 @@ $meses = array(1 => 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
                           <div class="small"><?php echo $meses[date('n')]; ?></div>
                         </div>
                         <div class="post-blog-grid-body">
-                          <h4 class="post-blog-grid-title text-bold text-center"><a class="text-base" href="agregar_empleado.php">Agregar Empleados</a></h4>
+                          <h4 class="post-blog-grid-title text-bold text-center"><a class="text-base" href="agregar_usuario.php">Agregar Usuarios</a></h4>
                         </div>
                       </div>
                     </div>
@@ -125,7 +127,7 @@ $meses = array(1 => 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
                           <div class="small"><?php echo $meses[date('n')]; ?></div>
                         </div>
                         <div class="post-blog-grid-body">
-                          <h4 class="post-blog-grid-title text-bold text-center"><a class="text-base" href="gestionar_empleado.php">Gestionar Empleados</a></h4>
+                          <h4 class="post-blog-grid-title text-bold text-center"><a class="text-base" href="gestionar_usuario.php">Gestionar Usuarios</a></h4>
                         </div>
                       </div>
                     </div>
