@@ -12,6 +12,20 @@ if ($idEmpresa_ != "") {
 	$id___ .= "AND e.id_empresa=$idEmpresa_";
 }
 
+
+if (isset($_SESSION['user_id'])) {
+	$id = $_SESSION['user_id'];
+	$tildes = $conexion->query("SET NAMES 'utf8'");
+	$sql="SELECT id, nombres, apellidos, correoElectronico, password, fechaRegistro, ultimoInicio, tipoUsuario, empresa FROM usuarios WHERE id = '$id'";
+	
+	  $result_login = mysqli_fetch_row(mysqli_query($conexion,$sql));
+	  $user = null;
+  
+	if (count($result_login) > 0) {
+	  $user = $result_login;
+	}
+}
+
 $tildes = $conexion->query("SET NAMES 'utf8'");
 $sql="SELECT e.id, e.nombre, e.apellidos, e.cedula, e.tel, emp.nombre, e.arl, e.ips, 
 e.tipo_seguro, e.email, e.cargo, e.ciudad, e.direccion 
